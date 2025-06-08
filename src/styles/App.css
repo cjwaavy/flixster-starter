@@ -1,4 +1,6 @@
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 
@@ -12,11 +14,21 @@
   padding: 20px;
 }
 
+a:visited,
+a:-webkit-any-link {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+}
+
+.movie-card-container{
+
+}
+
 @media (max-width: 600px) {
   .movie-card {
     width: 100%;
   }
-
+/*
   .search-bar {
     flex-direction: column;
     gap: 10px;
@@ -24,5 +36,5 @@
 
   .search-bar form {
     flex-direction: column;
-  }
+  } */
 }

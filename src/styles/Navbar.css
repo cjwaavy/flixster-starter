@@ -1,0 +1,39 @@
+.nav-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #2A2934;
+}
+
+.title {
+    font-size: 30px;
+    color: white;
+    font-weight: 600;
+}
+
+.search-sort-containter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2vh;
+}
+
+.search-area {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
+
+.search-bar {
+    height: 3vh;
+}
+
+.submit-search-button {
+    border: 1px solid white;
+    border-radius: 5%;
+    background-color: black;
+}
+
+.sort-area {
+    display: flex;
+}
