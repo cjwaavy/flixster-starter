@@ -84,6 +84,11 @@
 .toggle-option:hover:not(.active) {
     background-color: #d0d0d0;
 }
+
+.submit-search-button-mobile{
+    display: none;
+}
+
 @media screen and (max-width: 1230px){
     .movie-card-container{
         margin-left: 5%;
@@ -93,7 +98,34 @@
 
 @media (max-width: 768px){
     .movie-card{
-        height: 24vh; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
+        height: auto; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
         width: 12.5vh;
+    }
+    .movie-card-title{
+        margin: 0vh;
+        font-weight: 600;
+        font-size: small;
+    }
+    .movie-card-rating{
+        margin-bottom: 0.5vh;
+        color: gray;
+        font-weight: 200;
+        font-size: small;
+        align-self: flex-end;
+    }
+    .submit-search-button{
+        display: none;
+    }
+    .submit-search-button-mobile{
+        display: block;
+        border: 1px solid white;
+        border-radius: 5%;
+        background-color: black;
+    }
+    .search-sort-containter{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 12px;
     }
 }

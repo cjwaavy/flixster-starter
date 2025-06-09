@@ -41,6 +41,9 @@ const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearch
           <button className='submit-search-button' onClick={handleSearch}>
             Search
           </button>
+          <button className='submit-search-button-mobile' onClick={handleSearch}>
+            Search
+          </button>
           <button className='submit-search-button' onClick={handleClearSearch}>
             Clear
           </button>
