@@ -5,9 +5,32 @@ import { use } from 'react'
 import MovieCard from './MovieCard.jsx'
 import LoadMore from './LoadMore.jsx'
 
-const MovieCardContainer = ({page, setPage, searchTerm, showSearchResults, setShowSearchResults}) => {
+const MovieCardContainer = ({page, setPage, searchTerm, showSearchResults, setShowSearchResults, activeFilter, setActiveFilter}) => {
     const [movieData, setMovieData] = useState([])
     const [movieConfig, setMovieConfig] = useState(null)
+
+    const sortMoviesAlphabetically = () => {
+        setMovieData([...movieData].sort((a, b) => a.title.localeCompare(b.title)))
+    }
+    const sortMoviesByReleaseDate = () => {
+        setMovieData([...movieData].sort((a, b) => a.release_date.localeCompare(b.release_date)))
+    }
+    const sortMoviesByPopularity = () => {
+        setMovieData([...movieData].sort((a, b) => b.vote_average - a.vote_average))
+    }
+    useEffect(() => {
+        console.log(activeFilter)
+        if(activeFilter === 'alphabetic'){
+            sortMoviesAlphabetically()
+        }
+        else if (activeFilter === 'release-date'){
+            sortMoviesByReleaseDate()
+        }
+        else if (activeFilter === 'popularity'){
+            sortMoviesByPopularity()
+        }
+
+    }, [activeFilter])
 
     useEffect(() =>{
         const getConfig = async () => {

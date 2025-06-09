@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import '../styles/Navbar.css'
 // import { handleSearch } from '../utils/searchActions'
 
-const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearchTerm }) => {
+const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearchTerm, activeFilter, setActiveFilter}) => {
   const [liveSearchTerm, setLiveSearchTerm] = useState('')
   const handleClearSearch = () => {
     setShowSearchResults(false)
@@ -46,10 +46,11 @@ const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearch
           </button>
         </div>
         <div className='sort-area'>
-          <select className='sort-dropdown' defaultValue="Sort By">
-            <option value="popularity">Popularity</option>
-            <option value="release-date">Release Date</option>
-            <option value="rating">Rating</option>
+          <select className='sort-dropdown' defaultValue="Sort By" onChange={(event) => setActiveFilter(event.target.value)}>
+            <option value="default" selected disabled>{"Sort By"}</option>
+            <option value="alphabetic">{"Alphabetic: (A-Z)"}</option>
+            <option value="release-date">{"Release Date: (New to Old)"}</option>
+            <option value="popularity">{"Popularity: (Descending)"}</option>
           </select>
         </div>
       </div>

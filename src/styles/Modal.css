@@ -58,6 +58,9 @@
 }
 
 @media (max-width: 768px) {
+  .modal-image{
+    align-self: center;
+  }
   .modal-body {
     flex-direction: column;
   }

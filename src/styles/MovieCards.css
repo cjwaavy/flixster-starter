@@ -90,3 +90,10 @@
         margin-right: 5%;
     }
 }
+
+@media (max-width: 768px){
+    .movie-card{
+        height: 24vh; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
+        width: 12.5vh;
+    }
+}
