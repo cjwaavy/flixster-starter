@@ -1,4 +1,4 @@
-const fetchMovieConfig = async () => {
+const fetchMovieConfig = async () => { //technically the proper way to get image link prefix, so following suit
     const url = 'https://api.themoviedb.org/3/configuration';
     const options = {
         method: 'GET',

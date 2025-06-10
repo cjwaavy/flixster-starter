@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import '../styles/Navbar.css'
-// import { handleSearch } from '../utils/searchActions'
 
 const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearchTerm, activeFilter, setActiveFilter}) => {
-  const [liveSearchTerm, setLiveSearchTerm] = useState('')
+
+  const [liveSearchTerm, setLiveSearchTerm] = useState('') //used to detect if search bar is empty
   const handleClearSearch = () => {
     setShowSearchResults(false)
     setLiveSearchTerm('')
@@ -35,9 +35,16 @@ const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearch
       </a>
       <div className='search-sort-containter'>
         <div className='search-area'>
-          <input className='search-bar' placeholder='Search for movies' onChange={(event) => {setLiveSearchTerm(event.target.value)}}>
-
-          </input>
+          <input
+            className='search-bar'
+            placeholder='Search for movies'
+            onChange={(event) => {setLiveSearchTerm(event.target.value)}}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
           <button className='submit-search-button' onClick={handleSearch}>
             Search
           </button>

@@ -21,20 +21,22 @@ a:-webkit-any-link {
 }
 
 .movie-card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
+.app-footer {
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  color: #666;
+  font-size: 0.8rem;
+  border-top: 1px solid #eee;
 }
 
 @media (max-width: 600px) {
   .movie-card {
     width: 100%;
   }
-/*
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .search-bar form {
-    flex-direction: column;
-  } */
 }

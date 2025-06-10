@@ -1,38 +1,54 @@
 import { fetchMoivesByTitle, fetchMovieConfig, fetchMovieData } from '../utils/fetchMovieData.js'
 import '../styles/MovieCards.css'
-import React, { useEffect, useState } from 'react'
-import { use } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import MovieCard from './MovieCard.jsx'
 import LoadMore from './LoadMore.jsx'
+import SideBar from './SideBar.jsx'
 
-const MovieCardContainer = ({page, setPage, searchTerm, showSearchResults, setShowSearchResults, activeFilter, setActiveFilter}) => {
+const MovieCardContainer = ({ page, setPage, searchTerm, showSearchResults, setShowSearchResults, activeFilter, setActiveFilter }) => {
     const [movieData, setMovieData] = useState([])
     const [movieConfig, setMovieConfig] = useState(null)
+    const [sideBarFilter, setSideBarFilter] = useState('')
+    const [originalMovieData, setOriginalMovieData] = useState([])
 
-    const sortMoviesAlphabetically = () => {
-        setMovieData([...movieData].sort((a, b) => a.title.localeCompare(b.title)))
+    // Create a ref to track the previous search term
+    const prevSearchTermRef = useRef('');
+
+    const filterMoviesByWatched = () => {
+        return originalMovieData.filter(movie => movie.isWatched === true)
     }
-    const sortMoviesByReleaseDate = () => {
-        setMovieData([...movieData].sort((a, b) => a.release_date.localeCompare(b.release_date)))
-    }
-    const sortMoviesByPopularity = () => {
-        setMovieData([...movieData].sort((a, b) => b.vote_average - a.vote_average))
+    const filterMoviesByLiked = () => {
+        return originalMovieData.filter(movie => movie.isLiked === true)
     }
     useEffect(() => {
-        console.log(activeFilter)
-        if(activeFilter === 'alphabetic'){
-            sortMoviesAlphabetically()
+        console.log("Filter changed:", activeFilter, sideBarFilter)
+
+        let filteredData = [...originalMovieData]
+
+        if(sideBarFilter === 'watched'){
+            console.log("filtering by watched")
+            filteredData = filterMoviesByWatched()
         }
-        else if (activeFilter === 'release-date'){
-            sortMoviesByReleaseDate()
-        }
-        else if (activeFilter === 'popularity'){
-            sortMoviesByPopularity()
+        else if(sideBarFilter === 'liked'){
+            console.log("filtering by liked")
+            filteredData = filterMoviesByLiked()
         }
 
-    }, [activeFilter])
+        if (activeFilter === 'alphabetic') {
+            filteredData = [...filteredData].sort((a, b) => a.title.localeCompare(b.title))
+        }
+        else if (activeFilter === 'release-date') {
+            filteredData = [...filteredData].sort((a, b) => a.release_date.localeCompare(b.release_date))
+        }
+        else if (activeFilter === 'popularity') {
+            filteredData = [...filteredData].sort((a, b) => b.vote_average - a.vote_average)
+        }
 
-    useEffect(() =>{
+        setMovieData(filteredData)
+
+    }, [activeFilter, sideBarFilter, originalMovieData])
+
+    useEffect(() => {
         const getConfig = async () => {
             const config = await fetchMovieConfig()
             if (config) {
@@ -41,64 +57,125 @@ const MovieCardContainer = ({page, setPage, searchTerm, showSearchResults, setSh
             }
         }
         getConfig()
-    },[])
+    }, [])
+    // Reset sideBarFilter and page when switching tabs or entering a search term
+    useEffect(() => {
+        // Reset the filter to empty string
+        setSideBarFilter('')
+
+        // Reset page to 1 when search term changes
+        if (searchTerm !== prevSearchTermRef.current) {
+            setPage(1)
+        }
+    }, [showSearchResults, searchTerm, setPage])
+
     useEffect(() => {
         const getData = async () => {
             const data = await fetchMovieData(page)
             if (data) {
                 console.log(data)
-                setMovieData(page === 1 ? data.results : [...movieData, ...data.results])
+                const processedData = data.results.map(movie => ({
+                    ...movie,
+                    isLiked: false,
+                    isWatched: false
+                }))
+
+                const newData = page === 1 ? processedData : [...originalMovieData, ...processedData]
+                setOriginalMovieData(newData)
+                setMovieData(newData)
             }
         }
         const getSearchResults = async () => {
             console.log("in getSearchResults")
             const data = await fetchMoivesByTitle(page, searchTerm)
             if (data) {
-                console.log("data reuslts for query", data.results)
-                setMovieData(page === 1 ? data.results : [...movieData, ...data.results])
+                console.log("data results for query", data.results)
+                const processedData = data.results.map(movie => ({
+                    ...movie,
+                    isLiked: false,
+                    isWatched: false
+                }))
+
+                // For search, always replace the data when the search term changes
+                // Only append if we're loading more pages of the same search
+                const isNewSearch = searchTerm !== prevSearchTermRef.current;
+                const newData = page === 1 || isNewSearch ? processedData : [...originalMovieData, ...processedData]
+
+                setOriginalMovieData(newData)
+                setMovieData(newData)
+
+                // Update the previous search term reference
+                prevSearchTermRef.current = searchTerm;
             }
         }
-        console.log("showSeachResults was ", showSearchResults)
+        console.log("showSearchResults was ", showSearchResults)
         showSearchResults ? getSearchResults() : getData()
-        console.log("updated moveData to", movieData)
     }, [page, searchTerm, showSearchResults])
-    useEffect(() => {
-        console.log(movieData)
-    }, [movieData])
-    useEffect(() => {
-        console.log(movieConfig)
-    }, [movieConfig])
-    useEffect(() => {
 
-    }, [showSearchResults])
 
     return (
-        <div>
-            <div className="toggle-container">
-                <div className="toggle-switch">
-                    <button
-                        className={`toggle-option ${!showSearchResults ? 'active' : ''}`}
-                        onClick={() => setShowSearchResults(false)}
-                    >
-                        Now Playing
-                    </button>
-                    <button
-                        className={`toggle-option ${showSearchResults ? 'active' : ''}`}
-                        onClick={() => setShowSearchResults(true)}
-                    >
-                        Search
-                    </button>
+        <main className='MovieCardContainer'>
+            <div className='side-bar-container'>
+                <SideBar setSideBarFilter={setSideBarFilter} sideBarFilter={sideBarFilter} />
+            </div>
+            <div className='toggle-movie-card-contaitner'>
+
+                <div className="toggle-container">
+                    <div className="toggle-switch">
+                        <button
+                            className={`toggle-option ${!showSearchResults ? 'active' : ''}`}
+                            onClick={() => {
+                                setShowSearchResults(false)
+                                setSideBarFilter('') // Reset filter when clicking Now Playing
+                            }}
+                        >
+                            Now Playing
+                        </button>
+                        <button
+                            className={`toggle-option ${showSearchResults ? 'active' : ''}`}
+                            onClick={() => {
+                                setShowSearchResults(true)
+                                setSideBarFilter('') // Reset filter when clicking Search
+                            }}
+                        >
+                            Search
+                        </button>
+                    </div>
                 </div>
+                <div className="movie-card-container">
+                    {movieData && movieConfig && movieData.length > 0 ? (
+                        movieData.map((movie, index) => (
+                            <MovieCard
+                                key={index}
+                                movie={movie}
+                                imageUrl={`${movieConfig.images.base_url}original${movie.poster_path}`}
+                                onMovieUpdate={(updatedMovie) => {
+                                    const updatedOriginalData = originalMovieData.map(m =>
+                                        m.id === updatedMovie.id ? updatedMovie : m
+                                    );
+                                    setOriginalMovieData(updatedOriginalData);
+                                }}
+                            />
+                        ))
+                    ) : (
+                        <div className="no-movies-container">
+                            <div className="no-movies-icon">🎬</div>
+                            <h2 className="no-movies-title">No Movies Found</h2>
+                            <p className="no-movies-message">
+                                {sideBarFilter ?
+                                    `No movies match the "${sideBarFilter === 'liked' ? 'Liked' : 'Watched'}" filter. Try liking or marking some movies as watched, or select a different filter.` :
+                                    showSearchResults ?
+                                        `No movies match your search for "${searchTerm}". Try a different search term.` :
+                                        "No movies available. Please try again later."}
+                            </p>
+                        </div>
+                    )}
+                </div>
+                {movieData && movieData.length > 0 && (
+                    <LoadMore page={page} setPage={setPage} setMovieData={setMovieData} movieData={movieData} />
+                )}
             </div>
-            <div className="movie-card-container">
-                {movieData && movieConfig && movieData.map((movie, index) => {
-                    return (
-                        <MovieCard key={index} movie={movie} imageUrl={`${movieConfig.images.base_url}original${movie.poster_path}`} />
-                    )
-                })}
-            </div>
-            <LoadMore page={page} setPage={setPage} setMovieData={setMovieData} movieData={movieData} />
-        </div>
+        </main>
     )
 }
 

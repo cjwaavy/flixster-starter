@@ -1,23 +1,97 @@
+.MovieCardContainer{
+    display: flex  ;
+    flex-direction: row;
+}
 .movie-card-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 2vh;
-    margin-left: 12vh;
-    margin-right: 12vh;
+    margin-left: 6vh;
+    margin-right: 6vh;
     gap: 12px;
+    /* width: 90%; */
     row-gap: 24px;
 }
-
+.toggle-movie-card-contaitner{
+    width: 100%;
+}
+.side-bar-container{
+    background-color: rgb(0 0 0 / 0%);
+    width: 24vh;
+}
 .movie-card{
     background-color: #fff;
-    height: 47vh; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
-    width: 25vh;
+    height: 40vh; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
+    width: 20vh;
     border-radius: 7px;
     box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    position: relative;
 }
+.watched-button{
+    display: block;
+    position: absolute;
+    width: 5vh;
+    top: 2vh;
+    right: 1.5vh;
+    background-color: rgb( 0 0 0 / 0%);
+    border: 0;
+}
+.hide {
+    display: none;
+}
+.like-button{
+    display: block;
+    position: absolute;
+    width: 4vh;
+    top: 2vh;
+    left: 1.5vh;
+    background-color: rgb( 0 0 0 / 0%);
+    border: 0;
+}
+.movie-card:hover #likeButton{
+    display: block !important;
+    position: absolute;
+    width: 4vh;
+    top: 2vh;
+    left: 1.5vh;
+    background-color: rgb( 0 0 0 / 0%);
+    border: 0;
+}
+
+.movie-card:hover #watchedButton{
+    display: block !important;
+    position: absolute;
+    width: 5vh;
+    top: 2vh;
+    right: 1vh;
+    background-color: rgb( 0 0 0 / 0%);
+    border: 0;
+}
+.like-button:hover{
+    background-color: rgb( 0 0 0 / 0%);
+}
+
+.like-heart{
+    stroke-width: 1.5px;
+}
+
+
+.like-heart:hover{
+    fill: red !important;
+}
+
+.watch-eye:hover path{
+    fill: yellow !important;
+}
+
+.watch-eye path{
+    stroke: black;
+    stroke-width: 1px;
+}
+
 .movie-card img{
     width: 100%;
 }
@@ -87,6 +161,37 @@
 
 .submit-search-button-mobile{
     display: none;
+}
+
+.no-movies-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    text-align: center;
+    min-height: 300px;
+}
+
+.no-movies-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.no-movies-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.no-movies-message {
+    font-size: 16px;
+    color: #777;
+    max-width: 500px;
+    line-height: 1.5;
 }
 
 @media screen and (max-width: 1230px){
