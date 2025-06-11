@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import MovieCard from './MovieCard.jsx'
 import LoadMore from './LoadMore.jsx'
 import SideBar from './SideBar.jsx'
-
+import ScreenToggle from './ScreenToggle.jsx'
 const MovieCardContainer = ({ page, setPage, searchTerm, showSearchResults, setShowSearchResults, activeFilter, setActiveFilter }) => {
     const [movieData, setMovieData] = useState([])
     const [movieConfig, setMovieConfig] = useState(null)
@@ -14,24 +14,16 @@ const MovieCardContainer = ({ page, setPage, searchTerm, showSearchResults, setS
     // Create a ref to track the previous search term
     const prevSearchTermRef = useRef('');
 
-    const filterMoviesByWatched = () => {
-        return originalMovieData.filter(movie => movie.isWatched === true)
-    }
-    const filterMoviesByLiked = () => {
-        return originalMovieData.filter(movie => movie.isLiked === true)
-    }
-    useEffect(() => {
-        console.log("Filter changed:", activeFilter, sideBarFilter)
 
+    useEffect(() => {
         let filteredData = [...originalMovieData]
 
         if(sideBarFilter === 'watched'){
             console.log("filtering by watched")
-            filteredData = filterMoviesByWatched()
+            filteredData = originalMovieData.filter(movie => movie.isWatched === true)
         }
         else if(sideBarFilter === 'liked'){
-            console.log("filtering by liked")
-            filteredData = filterMoviesByLiked()
+            filteredData = originalMovieData.filter(movie => movie.isLiked === true)
         }
 
         if (activeFilter === 'alphabetic') {
@@ -119,29 +111,7 @@ const MovieCardContainer = ({ page, setPage, searchTerm, showSearchResults, setS
                 <SideBar setSideBarFilter={setSideBarFilter} sideBarFilter={sideBarFilter} />
             </div>
             <div className='toggle-movie-card-contaitner'>
-
-                <div className="toggle-container">
-                    <div className="toggle-switch">
-                        <button
-                            className={`toggle-option ${!showSearchResults ? 'active' : ''}`}
-                            onClick={() => {
-                                setShowSearchResults(false)
-                                setSideBarFilter('') // Reset filter when clicking Now Playing
-                            }}
-                        >
-                            Now Playing
-                        </button>
-                        <button
-                            className={`toggle-option ${showSearchResults ? 'active' : ''}`}
-                            onClick={() => {
-                                setShowSearchResults(true)
-                                setSideBarFilter('') // Reset filter when clicking Search
-                            }}
-                        >
-                            Search
-                        </button>
-                    </div>
-                </div>
+                <ScreenToggle showSearchResults={showSearchResults} setShowSearchResults={setShowSearchResults} setSideBarFilter={setSideBarFilter} />
                 <div className="movie-card-container">
                     {movieData && movieConfig && movieData.length > 0 ? (
                         movieData.map((movie, index) => (

@@ -18,6 +18,7 @@
   width: 80%;
   max-width: 900px;
   max-height: 90vh;
+  min-height: 45vh;
   overflow-y: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   animation: slideIn 0.3s ease;
@@ -64,6 +65,9 @@
   .modal-body {
     flex-direction: column;
   }
+  .modal-trailer{
+    height: 20vh !important;
+  }
 }
 
 .modal-image {
@@ -86,6 +90,10 @@
   line-height: 1.5;
 }
 
+.modal-trailer{
+  width: 75%;
+  height: 50%;
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
