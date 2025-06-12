@@ -2,9 +2,9 @@
 
 ## Unit Assignment: Flixster
 
-Submitted by: **NAME**
+Submitted by: **CHARLES MCCLASKY**
 
-Estimated time spent: **#** hours spent in total
+Estimated time spent: **10** hours spent in total
 
 Deployed Application (**required**): [Flixster Deployed Site](https://flixster-starter-ol1i.onrender.com/)
 
