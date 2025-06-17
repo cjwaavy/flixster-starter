@@ -22,7 +22,6 @@ const fetchMovieConfig = async () => { //technically the proper way to get image
 }
 
 const fetchMovieData = async (pageNumber) => {
-    console.log('fetchMovieData', pageNumber);
     const url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`;
     const options = {
         method: 'GET',

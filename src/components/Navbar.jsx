@@ -1,63 +1,75 @@
-import { useEffect, useState } from 'react'
-import '../styles/Navbar.css'
+import { useEffect, useState } from "react";
+import "../styles/Navbar.css";
 
-const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearchTerm, activeFilter, setActiveFilter}) => {
-
-  const [liveSearchTerm, setLiveSearchTerm] = useState('') //used to detect if search bar is empty
+const Navbar = ({
+  setShowSearchResults,
+  showSearchResults,
+  searchTerm,
+  setSearchTerm,
+  activeFilter,
+  setActiveFilter,
+}) => {
+  const [liveSearchTerm, setLiveSearchTerm] = useState(""); //used to detect if search bar is empty
   const handleClearSearch = () => {
-    setShowSearchResults(false)
-    setLiveSearchTerm('')
-    setSearchTerm('')
-    document.querySelector('.search-bar').value = ''
-  }
+    setShowSearchResults(false);
+    setLiveSearchTerm("");
+    setSearchTerm("");
+    document.querySelector(".search-bar").value = "";
+  };
   const handleSearch = () => {
-    console.log("handleSearch")
-    setShowSearchResults(true)
-    if(document.querySelector('.search-bar')) {
-      setSearchTerm(document.querySelector('.search-bar').value)
+    setShowSearchResults(true);
+    if (document.querySelector(".search-bar")) {
+      setSearchTerm(document.querySelector(".search-bar").value);
     }
-  }
+  };
   useEffect(() => {
-    console.log("showSearchResults:", showSearchResults)
-  }, [searchTerm])
+  }, [searchTerm]);
   useEffect(() => {
-
-    console.log(liveSearchTerm)
-    if(liveSearchTerm === '') {
-      setShowSearchResults(false)
-      console.log("setShowSearchResults to false because empty search bar")
+    if (liveSearchTerm === "") {
+      setShowSearchResults(false);
     }
-  }, [liveSearchTerm])
+  }, [liveSearchTerm]);
   return (
-    <nav className='nav-bar'>
+    <nav className="nav-bar">
       <a href="/">
-        <p className='title'>🎥Flixster🎬</p>
+        <p className="title">🎥Flixster🎬</p>
       </a>
-      <div className='search-sort-containter'>
-        <div className='search-area'>
+      <div className="search-sort-containter">
+        <div className="search-area">
           <input
-            className='search-bar'
-            placeholder='Search for movies'
-            onChange={(event) => {setLiveSearchTerm(event.target.value)}}
+            className="search-bar"
+            placeholder="Search for movies"
+            onChange={(event) => {
+              setLiveSearchTerm(event.target.value);
+            }}
             onKeyDown={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 handleSearch();
               }
             }}
           />
-          <button className='submit-search-button' onClick={handleSearch}>
+          <button className="submit-search-button" onClick={handleSearch}>
             Search
           </button>
-          <button className='submit-search-button-mobile' onClick={handleSearch}>
+          <button
+            className="submit-search-button-mobile"
+            onClick={handleSearch}
+          >
             Search
           </button>
-          <button className='submit-search-button' onClick={handleClearSearch}>
+          <button className="submit-search-button" onClick={handleClearSearch}>
             Clear
           </button>
         </div>
-        <div className='sort-area'>
-          <select className='sort-dropdown' defaultValue="Sort By" onChange={(event) => setActiveFilter(event.target.value)}>
-            <option value="default" selected disabled>{"Sort By"}</option>
+        <div className="sort-area">
+          <select
+            className="sort-dropdown"
+            defaultValue="Sort By"
+            onChange={(event) => setActiveFilter(event.target.value)}
+          >
+            <option value="default" selected disabled>
+              {"Sort By"}
+            </option>
             <option value="alphabetic">{"Alphabetic: (A-Z)"}</option>
             <option value="release-date">{"Release Date: (New to Old)"}</option>
             <option value="popularity">{"Popularity: (Descending)"}</option>
@@ -65,8 +77,7 @@ const Navbar = ({ setShowSearchResults, showSearchResults, searchTerm, setSearch
         </div>
       </div>
     </nav>
-  )
+  );
+};
 
-}
-
-export default Navbar
+export default Navbar;

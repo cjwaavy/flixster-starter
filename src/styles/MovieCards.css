@@ -1,202 +1,199 @@
-.MovieCardContainer{
-    display: flex  ;
-    flex-direction: row;
+.MovieCardContainer {
+  display: flex;
+  flex-direction: row;
 }
-.movie-card-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 2vh;
-    margin-left: 6vh;
-    margin-right: 6vh;
-    gap: 12px;
-    /* width: 90%; */
-    row-gap: 24px;
-}
-
-.toggle-movie-card-contaitner{
-    width: 100%;
+.movie-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 2vh;
+  margin-left: 6vh;
+  margin-right: 6vh;
+  gap: 12px;
+  /* width: 90%; */
+  row-gap: 24px;
 }
 
+.toggle-movie-card-contaitner {
+  width: 100%;
+}
 
-.side-bar-container{
-    background-color: rgb(0 0 0 / 0%);
-    width: 24vh;
+.side-bar-container {
+  background-color: rgb(0 0 0 / 0%);
+  width: 24vh;
 }
-.movie-card{
-    background-color: #fff;
-    height: 40vh; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
-    width: 20vh;
-    border-radius: 7px;
-    box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    position: relative;
+.movie-card {
+  background-color: #fff;
+  height: 40vh; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
+  width: 20vh;
+  border-radius: 7px;
+  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
 }
-.watched-button{
-    display: block;
-    position: absolute;
-    width: 5vh;
-    top: 2vh;
-    right: 1.5vh;
-    background-color: rgb( 0 0 0 / 0%);
-    border: 0;
+.watched-button {
+  display: block;
+  position: absolute;
+  width: 5vh;
+  top: 2vh;
+  right: 1.5vh;
+  background-color: rgb(0 0 0 / 0%);
+  border: 0;
 }
 .hide {
-    display: none;
+  display: none;
 }
-.like-button{
-    display: block;
-    position: absolute;
-    width: 4vh;
-    top: 2vh;
-    left: 1.5vh;
-    background-color: rgb( 0 0 0 / 0%);
-    border: 0;
+.like-button {
+  display: block;
+  position: absolute;
+  width: 4vh;
+  top: 2vh;
+  left: 1.5vh;
+  background-color: rgb(0 0 0 / 0%);
+  border: 0;
 }
-.movie-card:hover #likeButton{
-    display: block !important;
-    position: absolute;
-    width: 4vh;
-    top: 2vh;
-    left: 1.5vh;
-    background-color: rgb( 0 0 0 / 0%);
-    border: 0;
-}
-
-.movie-card:hover #watchedButton{
-    display: block !important;
-    position: absolute;
-    width: 5vh;
-    top: 2vh;
-    right: 1vh;
-    background-color: rgb( 0 0 0 / 0%);
-    border: 0;
-}
-.like-button:hover{
-    background-color: rgb( 0 0 0 / 0%);
+.movie-card:hover #likeButton {
+  display: block !important;
+  position: absolute;
+  width: 4vh;
+  top: 2vh;
+  left: 1.5vh;
+  background-color: rgb(0 0 0 / 0%);
+  border: 0;
 }
 
-.like-heart{
-    stroke-width: 1.5px;
+.movie-card:hover #watchedButton {
+  display: block !important;
+  position: absolute;
+  width: 5vh;
+  top: 2vh;
+  right: 1vh;
+  background-color: rgb(0 0 0 / 0%);
+  border: 0;
+}
+.like-button:hover {
+  background-color: rgb(0 0 0 / 0%);
 }
 
-
-.like-heart:hover{
-    fill: red !important;
+.like-heart {
+  stroke-width: 1.5px;
 }
 
-.watch-eye:hover path{
-    fill: yellow !important;
+.like-heart:hover {
+  fill: red !important;
 }
 
-.watch-eye path{
-    stroke: black;
-    stroke-width: 1px;
+.watch-eye:hover path {
+  fill: yellow !important;
 }
 
-.movie-card img{
-    width: 100%;
+.watch-eye path {
+  stroke: black;
+  stroke-width: 1px;
 }
 
-.movie-card:hover{
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
+.movie-card img {
+  width: 100%;
 }
 
-.movie-card-title{
-    margin: 0.5vh;
+.movie-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.movie-card-title {
+  margin: 0.5vh;
+  font-weight: 600;
+}
+.movie-card-rating {
+  margin-bottom: 0.5vh;
+  color: gray;
+  font-weight: 200;
+  font-size: small;
+  align-self: flex-end;
+}
+
+.load-more {
+  margin: 3vh;
+}
+.load-more-btn {
+  padding: 1vh;
+  border: 0px;
+}
+
+.submit-search-button-mobile {
+  display: none;
+}
+
+.no-movies-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  min-height: 300px;
+}
+
+.no-movies-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.no-movies-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.no-movies-message {
+  font-size: 16px;
+  color: #777;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 1230px) {
+  .movie-card-container {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    height: auto; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
+    width: 12.5vh;
+  }
+  .movie-card-title {
+    margin: 0vh;
     font-weight: 600;
-}
-.movie-card-rating{
+    font-size: small;
+  }
+  .movie-card-rating {
     margin-bottom: 0.5vh;
     color: gray;
     font-weight: 200;
     font-size: small;
     align-self: flex-end;
-}
-
-.load-more{
-    margin: 3vh;
-}
-.load-more-btn{
-    padding: 1vh;
-    border: 0px;
-}
-
-
-.submit-search-button-mobile{
+  }
+  .submit-search-button {
     display: none;
-}
-
-.no-movies-container {
-    width: 100%;
-    display: flex;
+  }
+  .submit-search-button-mobile {
+    display: block;
+    border: 1px solid white;
+    border-radius: 5%;
+    background-color: black;
+  }
+  .search-sort-containter {
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 50px 20px;
-    text-align: center;
-    min-height: 300px;
-}
-
-.no-movies-icon {
-    font-size: 60px;
-    margin-bottom: 20px;
-    color: #ccc;
-}
-
-.no-movies-title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.no-movies-message {
-    font-size: 16px;
-    color: #777;
-    max-width: 500px;
-    line-height: 1.5;
-}
-
-@media screen and (max-width: 1230px){
-    .movie-card-container{
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-}
-
-@media (max-width: 768px){
-    .movie-card{
-        height: auto; /* extra 2-3 vh for info 44.44 is the perfect 9:16*/
-        width: 12.5vh;
-    }
-    .movie-card-title{
-        margin: 0vh;
-        font-weight: 600;
-        font-size: small;
-    }
-    .movie-card-rating{
-        margin-bottom: 0.5vh;
-        color: gray;
-        font-weight: 200;
-        font-size: small;
-        align-self: flex-end;
-    }
-    .submit-search-button{
-        display: none;
-    }
-    .submit-search-button-mobile{
-        display: block;
-        border: 1px solid white;
-        border-radius: 5%;
-        background-color: black;
-    }
-    .search-sort-containter{
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        row-gap: 12px;
-    }
+    align-items: center;
+    row-gap: 12px;
+  }
 }
